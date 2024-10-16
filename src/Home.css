@@ -1,0 +1,44 @@
+/* Home.css */
+
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f1f1f1;
+    padding: 20px;
+}
+
+.home-title {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.location-list {
+    display: flex;
+    gap: 20px; /* Butonlar arasında boşluk bırakmak için */
+    list-style: none;
+    padding: 0;
+}
+
+.location-list li {
+    margin: 0;
+}
+
+.location-link {
+    text-decoration: none;
+    font-size: 24px;
+    background-color: #28a745; /* Yeşil renk */
+    color: white; /* Yazı rengi beyaz */
+    padding: 10px 20px;
+    border: 2px solid ;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.location-link:hover {
+    background-color: #28a745; /* Yeşil renk */
+    color: white; /* Yazı rengi beyaz */
+}

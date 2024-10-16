@@ -1,0 +1,100 @@
+/* App.css */
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container for all content */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header */
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+/* Link Styles */
+a {
+  text-decoration: none;
+  color: #3498db;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Table Styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #3498db;
+  color: white;
+}
+
+/* Button Styles */
+button {
+  background-color: #28a745; /* Yeşil renk */
+  color: white; /* Yazı rengi beyaz */
+  border: none; /* Kenarlıkları kaldır */
+  padding: 10px 20px; /* İçerik için boşluk */
+  text-align: center; /* Yazıyı ortala */
+  text-decoration: none; /* Altını çizme */
+  display: inline-block; /* Satır içi blok yap */
+  font-size: 16px; /* Yazı boyutu */
+  margin: 4px 2px; /* Boşluk ekle */
+  cursor: pointer; /* Üzerine gelince fare işaretçisini değiştir */
+  border-radius: 5px; /* Köşeleri yuvarla */
+  transition: background-color 0.3s; /* Renk geçişi */
+}
+
+button:hover {
+  background-color: #218838; /* Üzerine gelince daha koyu yeşil */
+}
+
+/* Form Styles */
+form {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+}
+
+input, select {
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+input:focus, select:focus {
+  border-color: #3498db;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  table, th, td {
+    font-size: 14px;
+  }
+
+  button {
+    padding: 8px 12px;
+  }
+}
