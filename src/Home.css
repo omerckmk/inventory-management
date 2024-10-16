@@ -42,3 +42,16 @@
     background-color: #28a745; /* Yeşil renk */
     color: white; /* Yazı rengi beyaz */
 }
+.logout-button {
+    background-color: #f44336; /* Kırmızı arka plan */
+    color: white; /* Beyaz metin */
+    padding: 10px 15px; /* İçerik boşluğu */
+    border: none; /* Kenarlık yok */
+    border-radius: 5px; /* Köşe yuvarlama */
+    cursor: pointer; /* İmleç değişimi */
+    transition: background-color 0.3s; /* Geçiş efekti */
+}
+
+.logout-button:hover {
+    background-color: #e53935; /* Hover'da koyulaşma */
+}

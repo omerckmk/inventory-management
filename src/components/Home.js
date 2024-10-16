@@ -1,8 +1,21 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { getAuth, signOut } from 'firebase/auth'; // Firebase auth'i import ediyoruz
 import '../Home.css'; // CSS dosyasını import ediyoruz
 
 const Home = () => {
+    const navigate = useNavigate(); // Navigasyonu kullanmak için
+
+    const handleLogout = async () => {
+        const auth = getAuth();
+        try {
+            await signOut(auth); // Firebase'den çıkış yap
+            navigate('/login'); // Çıkış yaptıktan sonra login sayfasına yönlendir
+        } catch (error) {
+            console.error("Çıkış yaparken hata oluştu:", error); // Hata mesajı
+        }
+    };
+
     return (
         <div className="home-container">
             <h1 className="home-title">Kleding inventory beheer</h1>
@@ -11,6 +24,7 @@ const Home = () => {
                 <li><Link to="/location/Deventer" className="location-link">Deventer</Link></li>
                 <li><Link to="/location/Zutphen" className="location-link">Zutphen</Link></li>
             </ul>
+            <button onClick={handleLogout} className="logout-button">Çıkış Yap</button> {/* Çıkış Butonu */}
         </div>
     );
 };

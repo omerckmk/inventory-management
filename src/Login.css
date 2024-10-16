@@ -1,0 +1,56 @@
+/* src/components/Login.css */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Sayfanın tamamını kaplar */
+    background-color: #f4f4f4; /* Arka plan rengi */
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 2rem; /* Başlık boyutu */
+    color: #333; /* Başlık rengi */
+}
+
+.login-form {
+    background: white; /* Form arka plan rengi */
+    padding: 20px;
+    border-radius: 10px; /* Yuvarlak köşeler */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Gölgelendirme */
+    width: 300px; /* Form genişliği */
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px; /* Label arasındaki boşluk */
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #ccc; /* Kenarlık rengi */
+    border-radius: 5px; /* Kenar yuvarlama */
+    font-size: 1rem; /* Yazı boyutu */
+}
+
+input:focus {
+    border-color: #4CAF50; /* Focus olunca kenarlık rengi */
+    outline: none; /* Kenar çizgisi yok */
+}
+
+.login-button {
+    background-color: #4CAF50; /* Buton rengi */
+    color: white; /* Buton metin rengi */
+    padding: 10px;
+    border: none; /* Kenarlık yok */
+    border-radius: 5px; /* Yuvarlak köşeler */
+    cursor: pointer; /* İmleç değişimi */
+    transition: background-color 0.3s; /* Geçiş efekti */
+    font-size: 1rem; /* Yazı boyutu */
+}
+
+.login-button:hover {
+    background-color: #45a049; /* Hover rengi */
+}

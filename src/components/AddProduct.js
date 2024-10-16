@@ -21,9 +21,9 @@ const AddProduct = () => {
                 quantity: parseInt(quantity),
                 location,
             });
-            alert("Ürün başarıyla eklendi");
+            alert("Product toegevoegen");
         } catch (error) {
-            console.error("Ürün ekleme hatası: ", error);
+            console.error("Error: ", error);
         }
     };
 
@@ -32,6 +32,7 @@ const AddProduct = () => {
             <div className="add-product-header">
                 <h1>{location} Nieuwe Product Toevoegen</h1>
                 <Link to="/">Homepage</Link>
+
             </div>
             <form onSubmit={handleSubmit} className="add-product-form">
                 <label>Product Code:</label>

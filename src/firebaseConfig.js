@@ -1,9 +1,13 @@
+// src/firebaseConfig.js
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc } from 'firebase/firestore';
+import { getAuth } from "firebase/auth";
 
+// Firebase yapılandırma bilgileri
 const firebaseConfig = {
     apiKey: "AIzaSyAYyhgUG-88lfQkHShCFG2aysC3ywIAK14",
     authDomain: "kleiding-inventarisatie.firebaseapp.com",
+    databaseURL: "https://kleiding-inventarisatie-default-rtdb.europe-west1.firebasedatabase.app",
     projectId: "kleiding-inventarisatie",
     storageBucket: "kleiding-inventarisatie.appspot.com",
     messagingSenderId: "142125810173",
@@ -11,8 +15,14 @@ const firebaseConfig = {
     measurementId: "G-5VG2BF5BRF"
 };
 
-const firebaseApp = initializeApp(firebaseConfig);
-const db = getFirestore(firebaseApp); // Firestore instance'ı oluşturuyoruz
+// Firebase uygulamasını başlat
+const app = initializeApp(firebaseConfig);
 
-export { db, collection, addDoc, getDocs, doc, updateDoc, deleteDoc };
+// Firestore instance'ı oluştur
+const db = getFirestore(app);
 
+// Auth instance'ı oluştur
+const auth = getAuth(app);
+
+// Gerekli değişkenleri dışa aktar
+export { db, auth, collection, addDoc, getDocs, doc, updateDoc, deleteDoc };

@@ -4,7 +4,7 @@ import { db } from "../firebaseConfig";
 import { collection, query, where, getDocs, doc, deleteDoc, updateDoc, getDoc } from "firebase/firestore";
 import "../StockList.css"; // CSS dosyasını burada import ediyoruz.
 
-const StockList = () => {
+const StockListPage = () => {
     const { location } = useParams();
     const [stockItems, setStockItems] = useState([]);
     const [loanItems, setLoanItems] = useState([]);
@@ -17,7 +17,6 @@ const StockList = () => {
                 id: doc.id,
                 ...doc.data(),
             }));
-            // Miktarı 0 olan ürünleri filtrele
             const filteredItems = items.filter(item => item.quantity > 0);
             setStockItems(filteredItems);
         };
@@ -58,15 +57,39 @@ const StockList = () => {
         }
     };
 
+    // CSV formatında dışa aktarma fonksiyonu
+    const exportToCSV = (filename, rows) => {
+        const csvContent = [
+            Object.keys(rows[0]).join(","), // Header
+            ...rows.map(row => Object.values(row).join(",")) // Data rows
+        ].join("\n");
+
+        const blob = new Blob([csvContent], { type: "text/csv" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = filename;
+        link.click();
+    };
+
     return (
-        <div>
-            <header>
-                <Link to={`/location/${location}/add`}>Nieuw product toevoegen</Link>
-                <Link to="/">Homepage</Link>
+        <div className="stock-list-container">
+            <header className="header">
+                <Link className="homepage-button" to="/">Homepage</Link>
                 <h1>{location} Inventary lijst</h1>
+                <Link className="add-product-button" to={`/location/${location}/add`}>Nieuw product toevoegen</Link>
             </header>
-            <table>
-            <thead>
+
+            <div className="export-buttons-container">
+                <button className="export-button" onClick={() => exportToCSV("stock_list.csv", stockItems)}>
+                    Exporteer Stoklijst
+                </button>
+                <button className="export-button" onClick={() => exportToCSV("loan_list.csv", loanItems)}>
+                    Exporteer Geleende Lijst
+                </button>
+            </div>
+
+            <table className="stock-table">
+                <thead>
                 <tr>
                     <th>Product code</th>
                     <th>Product naam</th>
@@ -83,9 +106,8 @@ const StockList = () => {
                         <td>{item.size}</td>
                         <td>{item.quantity}</td>
                         <td>
-                            <button onClick={() => handleDelete(item.id)}>Verwijder</button>
-                            <Link to={`/location/${location}/lend?productId=${item.id}`}>Lenen</Link>
-                            <Link to={`/location/${location}/update/${item.id}`}>Bijwerken</Link>
+                            <button className="delete-button" onClick={() => handleDelete(item.id)}>Verwijder</button>
+                            <Link className="update-button" to={`/location/${location}/update/${item.id}`}>Bijwerken</Link>
                         </td>
                     </tr>
                 ))}
@@ -93,7 +115,7 @@ const StockList = () => {
             </table>
 
             <h2>{location} Geleende Producten</h2>
-            <table>
+            <table className="loan-table">
                 <thead>
                 <tr>
                     <th>Productnaam</th>
@@ -117,7 +139,7 @@ const StockList = () => {
                         <td>{loan.lender}</td>
                         <td>{new Date(loan.date.seconds * 1000).toLocaleDateString()}</td>
                         <td>
-                            <button onClick={() => handleReturnLoan(loan.id, loan.productId, loan.quantity)}>
+                            <button className="return-button" onClick={() => handleReturnLoan(loan.id, loan.productId, loan.quantity)}>
                                 Teruggeven
                             </button>
                         </td>
@@ -129,4 +151,4 @@ const StockList = () => {
     );
 };
 
-export default StockList;
+export default StockListPage;
