@@ -1,12 +1,17 @@
+/* Genel ayarlar */
 .loan-list-container {
     padding: 20px;
     font-family: Arial, sans-serif;
+    box-sizing: border-box; /* İçerik taşmasını engelle */
+    max-width: 100%; /* İçerik genişliğini sınırlamak için */
 }
 
+/* Başlık alanı */
 .header {
     margin-bottom: 20px;
 }
 
+/* Geri butonu alanı */
 .back-button-container {
     margin-bottom: 20px;
     display: flex;
@@ -21,12 +26,15 @@
     cursor: pointer;
     border: none;
     transition: background-color 0.3s ease;
+    min-width: 150px; /* Minimum genişlik */
+    text-align: center; /* Metni ortala */
 }
 
 .back-button:hover {
     background-color: #45a049;
 }
 
+/* Export butonları alanı */
 .export-buttons-container {
     display: flex;
     justify-content: flex-end;
@@ -41,16 +49,19 @@
     cursor: pointer;
     border: none;
     transition: background-color 0.3s ease;
+    min-width: 150px; /* Minimum genişlik */
 }
 
 .export-button:hover {
     background-color: #45a049;
 }
 
+/* Tablo stilleri */
 .loan-table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hafif gölge ekle */
 }
 
 .loan-table th,
@@ -67,4 +78,38 @@
 
 .loan-table tr:hover {
     background-color: #f9f9f9;
+}
+
+/* Mobil uyumlu düzenlemeler */
+@media (max-width: 768px) {
+    /* Butonları tam genişlikte ve dikey hizala */
+    .back-button-container {
+        justify-content: center;
+    }
+
+    .back-button,
+    .export-button {
+        width: 100%; /* Tam genişlik */
+        max-width: 250px; /* Maksimum genişlik */
+    }
+
+    /* Export butonları için düzenleme */
+    .export-buttons-container {
+        justify-content: center; /* Mobilde butonları ortala */
+        gap: 10px; /* Butonlar arasındaki boşluk */
+        flex-direction: column; /* Butonları dikey sırala */
+    }
+
+    /* Tablo hücrelerinde metin boyutlarını küçült */
+    .loan-table th,
+    .loan-table td {
+        padding: 8px; /* Hücre içi boşlukları küçült */
+        font-size: 14px; /* Yazı boyutunu küçült */
+    }
+
+    /* Tablonun genişliğini ayarla */
+    .loan-table {
+        width: 100%;
+        overflow-x: auto; /* Taşma olduğunda yatay kaydırma ekle */
+    }
 }

@@ -1,5 +1,4 @@
-/* Home.css */
-
+/* Genel ayarlar */
 .home-container {
     display: flex;
     flex-direction: column;
@@ -8,40 +7,55 @@
     height: 100vh;
     background-color: #f1f1f1;
     padding: 20px;
+    max-width: 100%; /* İçerik genişliğini sınırlamak için */
+    box-sizing: border-box; /* Taşmayı önlemek için kutu modelini ayarla */
 }
 
+/* Başlık */
 .home-title {
     font-size: 36px;
     color: #333;
     margin-bottom: 30px;
+    text-align: center; /* Başlık mobilde daha iyi hizalansın */
 }
 
+/* Konum listesi (butonlar) */
 .location-list {
     display: flex;
-    gap: 20px; /* Butonlar arasında boşluk bırakmak için */
+    gap: 20px; /* Butonlar arasında boşluk bırak */
     list-style: none;
     padding: 0;
+    flex-wrap: wrap; /* Mobilde butonlar taşarsa sarma yap */
+    justify-content: center; /* Butonları ortala */
 }
 
+/* Her liste öğesi için stil */
 .location-list li {
     margin: 0;
 }
 
+/* Konum butonları */
 .location-link {
     text-decoration: none;
     font-size: 24px;
     background-color: #28a745; /* Yeşil renk */
     color: white; /* Yazı rengi beyaz */
     padding: 10px 20px;
-    border: 2px solid ;
+    border: 2px solid;
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
+    display: block; /* Butonların tam genişlik alması için */
+    text-align: center; /* Metni ortala */
+    min-width: 150px; /* Minimum genişlik */
 }
 
+/* Buton hover durumu */
 .location-link:hover {
     background-color: #28a745; /* Yeşil renk */
     color: white; /* Yazı rengi beyaz */
 }
+
+/* Çıkış butonu */
 .logout-button {
     background-color: #f44336; /* Kırmızı arka plan */
     color: white; /* Beyaz metin */
@@ -50,8 +64,35 @@
     border-radius: 5px; /* Köşe yuvarlama */
     cursor: pointer; /* İmleç değişimi */
     transition: background-color 0.3s; /* Geçiş efekti */
+    width: 100%; /* Mobilde tam genişlik */
+    max-width: 200px; /* Daha büyük ekranlarda maksimum genişlik */
+    margin-top: 20px; /* Üstten boşluk */
 }
 
+/* Hover durumu */
 .logout-button:hover {
     background-color: #e53935; /* Hover'da koyulaşma */
+}
+
+/* Mobil uyum için düzenlemeler */
+@media (max-width: 768px) {
+    .home-title {
+        font-size: 28px; /* Başlık boyutunu küçült */
+    }
+
+    .location-link {
+        font-size: 18px; /* Buton yazı boyutunu küçült */
+        padding: 10px; /* Buton içeriğini daralt */
+        min-width: 120px; /* Minimum genişlik daha küçük olsun */
+    }
+
+    .location-list {
+        gap: 10px; /* Mobilde butonlar arasındaki boşluğu küçült */
+        flex-direction: column; /* Butonları dikey sırala */
+    }
+
+    .logout-button {
+        padding: 10px; /* Butonun içeriğini biraz küçült */
+        font-size: 18px; /* Yazı boyutunu küçült */
+    }
 }

@@ -1,38 +1,46 @@
+/* Genel Ayarlar */
 .stock-list-container {
     padding: 20px;
     font-family: Arial, sans-serif;
+    max-width: 100%; /* İçerik genişliğini sınırlandırmak için */
 }
 
+/* Başlık alanı için düzenlemeler */
 .header {
     display: flex;
+    flex-wrap: wrap; /* Mobil cihazlarda taşma olmasın diye esnek sarmalama */
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
 }
 
+/* Mobil cihazlarda ana sayfa butonu ve aksiyon butonları */
 .homepage-button-container {
-    flex: 1;
+    width: 100%; /* Mobilde genişliği %100 yap */
+    margin-bottom: 15px; /* Butonlar arasında boşluk oluştur */
 }
 
 .action-buttons-container {
     display: flex;
-    gap: 15px;
-    flex: 1;
-    justify-content: flex-end;
+    flex-direction: column; /* Mobilde butonları dikey sırala */
+    gap: 10px; /* Butonlar arasında boşluk */
+    width: 100%; /* Tam genişlik */
+    align-items: center; /* Dikeyde ortala */
 }
 
+/* Butonlar */
 .homepage-button,
 .add-product-button,
 .lend-button,
 .loan-page-button {
+    width: 100%; /* Butonları tam genişlik yap */
+    max-width: 300px; /* Butonların maksimum genişliği */
     background-color: #4CAF50;
     color: white;
-    padding: 10px 20px;
+    padding: 10px;
     text-decoration: none;
     border-radius: 5px;
     text-align: center;
-    min-width: 150px;
-    display: inline-block;
     transition: background-color 0.3s ease;
 }
 
@@ -43,21 +51,27 @@
     background-color: #45a049;
 }
 
+/* Sayfa başlığı */
 .page-title {
     text-align: center;
+    font-size: 1.5rem; /* Mobilde daha uygun bir başlık boyutu */
     margin-bottom: 20px;
 }
 
+/* Excel ve PDF dışa aktarma butonları */
 .export-buttons-container {
     display: flex;
-    justify-content: flex-end;
-    margin-bottom: 20px;
+    justify-content: center; /* Butonları ortala */
+    flex-wrap: wrap; /* Mobilde butonları sarmalayacak şekilde yap */
+    gap: 10px; /* Butonlar arasında boşluk */
 }
 
 .export-button {
+    width: 100%; /* Butonları tam genişlik yap */
+    max-width: 300px; /* Maksimum genişlik sınırı */
     background-color: #4CAF50;
     color: white;
-    padding: 10px 20px;
+    padding: 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -68,6 +82,7 @@
     background-color: #45a049;
 }
 
+/* Tablo için düzenlemeler */
 .stock-table {
     width: 100%;
     border-collapse: collapse;
@@ -78,8 +93,9 @@
 .stock-table th,
 .stock-table td {
     border: 1px solid #ddd;
-    padding: 12px;
+    padding: 8px;
     text-align: center;
+    font-size: 0.9rem; /* Mobilde yazı boyutunu biraz küçült */
 }
 
 .stock-table th {
@@ -87,20 +103,23 @@
     font-weight: bold;
 }
 
-.stock-table tr:hover {
-    background-color: #f9f9f9;
+/* Mobilde tabloyu yatay kaydırılabilir yap */
+@media (max-width: 600px) {
+    .stock-table {
+        display: block;
+        overflow-x: auto; /* Yatay kaydırma */
+        white-space: nowrap; /* İçeriğin bir satıra sığması */
+    }
 }
 
-.delete-button{
-    margin-right: 10px;
-}
-
+/* Mobilde butonlar için düzenleme */
 .delete-button,
 .update-button {
+    width: 100%; /* Butonları tam genişlik yap */
     background-color: #4CAF50;
     color: white;
     border: none;
-    padding: 10px 15px;
+    padding: 10px;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -111,19 +130,10 @@
     background-color: #45a049;
 }
 
-/* Mobile responsive adjustments */
-@media (max-width: 768px) {
-    .action-buttons-container {
-        flex-direction: column;
-        gap: 10px;
-        justify-content: center;
-    }
-
-    .homepage-button,
-    .add-product-button,
-    .lend-button,
-    .loan-page-button {
-        width: 100%;
-        text-align: center;
+/* Mobilde tablo hücrelerinin taşmaması için */
+@media (max-width: 600px) {
+    .acties-table {
+        display: block;
+        white-space: nowrap;
     }
 }
