@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import {useParams, useNavigate, Link} from "react-router-dom";
 import { db } from "../firebaseConfig";
 import { collection, query, where, getDocs, addDoc, doc, updateDoc } from "firebase/firestore";
 import "../LendProduct.css"; // CSS dosyasını import ediyoruz
@@ -48,10 +48,10 @@ const LendProduct = () => {
                 return;
             }
 
-            const newQuantity = selectedProduct.quantity - parsedQuantity;  // Ödünç işlemi
+            const newQuantity = selectedProduct.quantity - parsedQuantity;
 
             try {
-                // Ödünç verilen ürünü loans koleksiyonuna ekle
+
                 await addDoc(collection(db, "loans"), {
                     productId: selectedProduct.id,
                     productName: selectedProduct.productName,
@@ -80,7 +80,15 @@ const LendProduct = () => {
 
     return (
         <div className="lend-product-container">
-            <h2 className="lend-product-title">{location} Lenen formulier</h2>
+
+            <div className="back-button-container">
+                <Link className="homepage-button" to="/">Homepage</Link>
+                <h2 className="lend-product-title">{location} Lenen formulier</h2>
+                <button className="back-button" onClick={() => navigate(-1)}>
+                    Vorige pagina
+                </button>
+            </div>
+
             <form onSubmit={handleSubmit} className="lend-product-form">
                 <div className="form-group">
                     <label>Kies Product:</label>
@@ -98,11 +106,11 @@ const LendProduct = () => {
                     <>
                         <div className="form-group">
                             <label>Product Code:</label>
-                            <input type="text" value={selectedProduct.productCode} disabled />
+                            <input type="text" value={selectedProduct.productCode} disabled/>
                         </div>
                         <div className="form-group">
                             <label>Maat:</label>
-                            <input type="text" value={selectedProduct.size} disabled />
+                            <input type="text" value={selectedProduct.size} disabled/>
                         </div>
                         <div className="form-group">
                             <label>Aantal:</label>
@@ -115,7 +123,7 @@ const LendProduct = () => {
                             />
                         </div>
                         <div className="form-group">
-                            <label>Lener:</label>
+                            <label>Lener(met personeelnummer):</label>
                             <input
                                 type="text"
                                 value={borrower}
@@ -124,7 +132,7 @@ const LendProduct = () => {
                             />
                         </div>
                         <div className="form-group">
-                            <label>Gever:</label>
+                            <label>Uitlener:</label>
                             <input
                                 type="text"
                                 value={lender}

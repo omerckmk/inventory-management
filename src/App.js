@@ -6,7 +6,8 @@ import AddProduct from './components/AddProduct';
 import LendProduct from "./components/LendProduct";
 import UpdateProduct from "./components/UpdateProduct";
 import Login from './components/Login'; // Login bileşeni
-import ProtectedRoute from './components/ProtectedRoute'; // ProtectedRoute'u import et
+import ProtectedRoute from './components/ProtectedRoute';// ProtectedRoute'u import et
+import LoanProductPage from './components/LoanProductPage';
 
 const App = () => {
     return (
@@ -37,6 +38,7 @@ const App = () => {
                     path="/location/:location/update/:productId"
                     element={<ProtectedRoute element={UpdateProduct} />}
                 />
+                <Route path="/loan-products" element={<LoanProductPage />} />
             </Routes>
         </Router>
     );

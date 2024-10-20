@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { db } from "../firebaseConfig";
-import { collection, query, where, getDocs, doc, deleteDoc, updateDoc, getDoc } from "firebase/firestore";
+import { collection, query, where, getDocs, doc, deleteDoc } from "firebase/firestore";
+import * as XLSX from "xlsx";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 import "../StockList.css"; // CSS dosyasını burada import ediyoruz.
 
 const StockListPage = () => {
     const { location } = useParams();
     const [stockItems, setStockItems] = useState([]);
-    const [loanItems, setLoanItems] = useState([]);
+    const navigate = useNavigate(); // Yönlendirme için kullanacağımız hook
 
     useEffect(() => {
         const fetchStockItems = async () => {
@@ -21,18 +24,7 @@ const StockListPage = () => {
             setStockItems(filteredItems);
         };
 
-        const fetchLoanItems = async () => {
-            const q = query(collection(db, "loans"), where("location", "==", location));
-            const querySnapshot = await getDocs(q);
-            const items = querySnapshot.docs.map(doc => ({
-                id: doc.id,
-                ...doc.data(),
-            }));
-            setLoanItems(items);
-        };
-
         fetchStockItems();
-        fetchLoanItems();
     }, [location]);
 
     const handleDelete = async (id) => {
@@ -40,51 +32,58 @@ const StockListPage = () => {
         setStockItems(stockItems.filter(item => item.id !== id));
     };
 
-    const handleReturnLoan = async (loanId, productId, quantity) => {
-        try {
-            await deleteDoc(doc(db, "loans", loanId));
-            const productRef = doc(db, "stock", productId);
-            const productDoc = await getDoc(productRef);
+    // Excel formatında dışa aktarma fonksiyonu
+    const exportToExcel = (filename, rows) => {
+        const worksheet = XLSX.utils.json_to_sheet(rows);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, `${location} Voorraad Lijst`);
 
-            if (productDoc.exists()) {
-                const currentQuantity = productDoc.data().quantity || 0;
-                const newQuantity = parseInt(currentQuantity, 10) + parseInt(quantity, 10);
-                await updateDoc(productRef, { quantity: newQuantity });
-                setLoanItems(loanItems.filter(item => item.id !== loanId));
-            }
-        } catch (error) {
-            console.error("Hata:", error);
-        }
+        // Export as Excel file
+        XLSX.writeFile(workbook, `${filename}.xlsx`);
     };
 
-    // CSV formatında dışa aktarma fonksiyonu
-    const exportToCSV = (filename, rows) => {
-        const csvContent = [
-            Object.keys(rows[0]).join(","), // Header
-            ...rows.map(row => Object.values(row).join(",")) // Data rows
-        ].join("\n");
+    // PDF formatında dışa aktarma fonksiyonu
+    const exportToPDF = (filename, rows) => {
+        const doc = new jsPDF();
 
-        const blob = new Blob([csvContent], { type: "text/csv" });
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download = filename;
-        link.click();
+        // Başlık
+        doc.text(`${location} Voorraad Lijst`, 20, 10);
+
+        // Tabloyu otomatik oluştur
+        doc.autoTable({
+            head: [["Location", "Product code", "Product naam", "Maat", "Aantal"]],
+            body: rows.map(row => [row.location, row.productCode, row.productName, row.size, row.quantity]),
+        });
+
+        doc.save(`${filename}.pdf`);
     };
 
     return (
         <div className="stock-list-container">
             <header className="header">
-                <Link className="homepage-button" to="/">Homepage</Link>
-                <h1>{location} Inventary lijst</h1>
-                <Link className="add-product-button" to={`/location/${location}/add`}>Nieuw product toevoegen</Link>
+                <div className="homepage-button-container">
+                    <Link className="homepage-button" to="/">Homepage</Link>
+                </div>
+                <div className="action-buttons-container">
+                    <Link className="add-product-button" to={`/location/${location}/add`}>Nieuw product toevoegen</Link>
+                    <Link className="lend-button" to={`/location/${location}/lend`}>Lenen</Link>
+                    <button
+                        className="loan-page-button"
+                        onClick={() => navigate("/loan-products", { state: { location } })}
+                    >
+                        Geleende Producten
+                    </button>
+                </div>
             </header>
 
+            <h1 className="page-title">{location} Voorraad</h1>
+
             <div className="export-buttons-container">
-                <button className="export-button" onClick={() => exportToCSV("stock_list.csv", stockItems)}>
-                    Exporteer Stoklijst
+                <button className="export-button" onClick={() => exportToExcel("stock_list", stockItems)}>
+                    Exporteer Stoklijst (Excel)
                 </button>
-                <button className="export-button" onClick={() => exportToCSV("loan_list.csv", loanItems)}>
-                    Exporteer Geleende Lijst
+                <button className="export-button" onClick={() => exportToPDF("stock_list", stockItems)}>
+                    Exporteer Stoklijst (PDF)
                 </button>
             </div>
 
@@ -105,7 +104,7 @@ const StockListPage = () => {
                         <td>{item.productName}</td>
                         <td>{item.size}</td>
                         <td>{item.quantity}</td>
-                        <td>
+                        <td className="acties-table">
                             <button className="delete-button" onClick={() => handleDelete(item.id)}>Verwijder</button>
                             <Link className="update-button" to={`/location/${location}/update/${item.id}`}>Bijwerken</Link>
                         </td>
@@ -114,39 +113,6 @@ const StockListPage = () => {
                 </tbody>
             </table>
 
-            <h2>{location} Geleende Producten</h2>
-            <table className="loan-table">
-                <thead>
-                <tr>
-                    <th>Productnaam</th>
-                    <th>Productcode</th>
-                    <th>Maat</th>
-                    <th>Aantal</th>
-                    <th>Geleend door</th>
-                    <th>Gever</th>
-                    <th>Datum</th>
-                    <th>Acties</th>
-                </tr>
-                </thead>
-                <tbody>
-                {loanItems.map((loan) => (
-                    <tr key={loan.id}>
-                        <td>{loan.productName}</td>
-                        <td>{loan.productCode}</td>
-                        <td>{loan.size}</td>
-                        <td>{loan.quantity}</td>
-                        <td>{loan.borrower}</td>
-                        <td>{loan.lender}</td>
-                        <td>{new Date(loan.date.seconds * 1000).toLocaleDateString()}</td>
-                        <td>
-                            <button className="return-button" onClick={() => handleReturnLoan(loan.id, loan.productId, loan.quantity)}>
-                                Teruggeven
-                            </button>
-                        </td>
-                    </tr>
-                ))}
-                </tbody>
-            </table>
         </div>
     );
 };

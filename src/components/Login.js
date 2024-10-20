@@ -17,7 +17,7 @@ const Login = () => {
             navigate('/'); // Başarılı girişten sonra anasayfaya yönlendir
         } catch (error) {
             console.error("Giriş hatası: ", error);
-            alert("Giriş başarısız. Lütfen bilgilerinizi kontrol edin.");
+            alert("Inloggen mislukt. Controleer uw gegevens alstublieft");
         }
     };
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import { db } from "../firebaseConfig";
 import { collection, addDoc } from "firebase/firestore";
 import '../AddProduct.css'; // Assuming you have a separate CSS file for styling
@@ -10,6 +10,7 @@ const AddProduct = () => {
     const [productName, setProductName] = useState("");
     const [size, setSize] = useState("");
     const [quantity, setQuantity] = useState(0);
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -30,9 +31,11 @@ const AddProduct = () => {
     return (
         <div className="add-product-container">
             <div className="add-product-header">
-                <h1>{location} Nieuwe Product Toevoegen</h1>
                 <Link to="/">Homepage</Link>
-
+                <h1>{location} Nieuwe Product Toevoegen</h1>
+                    <button className="back-button" onClick={() => navigate(-1)}>
+                       vorige pagina
+                    </button>
             </div>
             <form onSubmit={handleSubmit} className="add-product-form">
                 <label>Product Code:</label>

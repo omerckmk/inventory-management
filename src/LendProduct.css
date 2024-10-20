@@ -1,5 +1,12 @@
 /* LendProduct.css */
+.back-button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-right: 20px;
 
+}
 .lend-product-container {
     max-width: 600px;
     margin: 40px auto;
@@ -43,7 +50,7 @@
 
 .lend-button {
     padding: 10px 15px;
-    background-color: #007bff;
+    background-color:  #4CAF50;;
     color: white;
     border: none;
     border-radius: 5px;
@@ -52,7 +59,7 @@
 }
 
 .lend-button:hover {
-    background-color: #0056b3;
+    background-color:#4CAF50;;
 }
 
 @media (max-width: 768px) {

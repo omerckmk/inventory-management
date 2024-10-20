@@ -17,14 +17,15 @@ const Home = () => {
     };
 
     return (
+
         <div className="home-container">
-            <h1 className="home-title">Kleding inventory beheer</h1>
+            <h1 className="home-title">Kleding voorraad beheer</h1>
             <ul className="location-list">
                 <li><Link to="/location/Apeldoorn" className="location-link">Apeldoorn</Link></li>
                 <li><Link to="/location/Deventer" className="location-link">Deventer</Link></li>
                 <li><Link to="/location/Zutphen" className="location-link">Zutphen</Link></li>
             </ul>
-            <button onClick={handleLogout} className="logout-button">Çıkış Yap</button> {/* Çıkış Butonu */}
+            <button onClick={handleLogout} className="logout-button">Uitloggen</button> {/* Çıkış Butonu */}
         </div>
     );
 };
