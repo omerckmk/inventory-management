@@ -8,6 +8,7 @@
     background-color: #f9f9f9;
 }
 
+/* Header section */
 .add-product-header {
     display: flex;
     justify-content: space-between;
@@ -18,24 +19,33 @@
 .add-product-header h1 {
     font-size: 24px;
     color: #333;
+    margin: 0;
 }
 
 .add-product-header a {
     background-color: #67b246;
     color: white;
-    padding: 10px 15px;
+    padding: 10px 20px; /* Increased padding to match button size */
     border-radius: 5px;
     text-decoration: none;
     transition: background-color 0.3s ease;
+    font-size: 16px; /* Ensures consistency with other buttons */
+    min-width: 150px; /* Ensures all buttons/links have the same width */
+    text-align: center;
 }
 
 .add-product-header a:hover {
     background-color: #559c36;
 }
 
+/* Form styling */
+.add-product-form {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    gap: 15px; /* Space between form elements */
+}
+
 .add-product-form label {
-    display: block;
-    margin-bottom: 5px;
     font-size: 14px;
     color: #555;
 }
@@ -43,24 +53,44 @@
 .add-product-form input {
     width: 100%;
     padding: 10px;
-    margin-bottom: 15px;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 16px;
+    box-sizing: border-box;
 }
 
+/* Button styling */
 .add-product-form button {
-    width: 100%;
-    padding: 10px;
+    padding: 10px 20px; /* Match padding with header links */
     background-color: #67b246;
     color: white;
     border: none;
     border-radius: 5px;
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    min-width: 150px; /* Ensures button width consistency with header buttons */
 }
 
 .add-product-form button:hover {
     background-color: #559c36;
+}
+
+/* Ensures input and buttons are aligned */
+.add-product-form input, .add-product-form button {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .add-product-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .add-product-header h1 {
+        margin-bottom: 10px;
+    }
 }

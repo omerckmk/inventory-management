@@ -1,9 +1,9 @@
 // src/components/Login.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../firebaseConfig'; // Firebase Auth'ı içe aktar
+import { auth } from '../firebaseConfig';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import '../Login.css'; // CSS dosyasını içe aktar
+import '../Login.css';
 
 const Login = () => {
     const [email, setEmail] = useState('');

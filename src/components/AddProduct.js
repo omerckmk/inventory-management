@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import { db } from "../firebaseConfig";
 import { collection, addDoc } from "firebase/firestore";
-import '../AddProduct.css'; // Assuming you have a separate CSS file for styling
+import '../AddProduct.css';
 
 const AddProduct = () => {
     const { location } = useParams(); // Get location from URL
@@ -32,11 +32,11 @@ const AddProduct = () => {
         <div className="add-product-container">
             <div className="add-product-header">
                 <Link to="/">Homepage</Link>
-                <h1>{location} Nieuwe Product Toevoegen</h1>
-                    <button className="back-button" onClick={() => navigate(-1)}>
-                       vorige pagina
-                    </button>
+                <button className="back-button" onClick={() => navigate(-1)}>
+                    vorige pagina
+                </button>
             </div>
+            <h1>{location} Nieuwe Product Toevoegen</h1>
             <form onSubmit={handleSubmit} className="add-product-form">
                 <label>Product Code:</label>
                 <input

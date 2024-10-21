@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { db } from "../firebaseConfig";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-import '../UpdateProduct.css'; // CSS dosyasını dahil et
+import '../UpdateProduct.css';
 
 const UpdateProduct = () => {
     const { productId } = useParams();
@@ -21,7 +21,8 @@ const UpdateProduct = () => {
             if (productDoc.exists()) {
                 setProduct(productDoc.data());
             } else {
-                console.log("product niet gevonden!");
+                console.log("Product niet gevonden!");
+                alert("Product niet gevonden!");
             }
         };
 

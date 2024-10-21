@@ -9,6 +9,12 @@
 /* Başlık alanı */
 .header {
     margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+
+}
+.header h1{
+    font-size: 36px;
 }
 
 /* Geri butonu alanı */

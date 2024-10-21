@@ -1,77 +1,91 @@
-/* Genel Ayarlar */
+/* General container styles */
 .stock-list-container {
     padding: 20px;
     font-family: Arial, sans-serif;
-    max-width: 100%; /* İçerik genişliğini sınırlandırmak için */
 }
 
-/* Başlık alanı için düzenlemeler */
+/* Header and button containers */
 .header {
     display: flex;
-    flex-wrap: wrap; /* Mobil cihazlarda taşma olmasın diye esnek sarmalama */
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
 }
 
-/* Mobil cihazlarda ana sayfa butonu ve aksiyon butonları */
 .homepage-button-container {
-    width: 100%; /* Mobilde genişliği %100 yap */
-    margin-bottom: 15px; /* Butonlar arasında boşluk oluştur */
+    flex: 1;
 }
 
 .action-buttons-container {
     display: flex;
-    flex-direction: column; /* Mobilde butonları dikey sırala */
-    gap: 10px; /* Butonlar arasında boşluk */
-    width: 100%; /* Tam genişlik */
-    align-items: center; /* Dikeyde ortala */
+    gap: 15px;
+    flex: 1;
+    justify-content: flex-end;
+    font-size: 12px;
 }
 
-/* Butonlar */
+/* Shared button styles for all buttons */
+.button,
 .homepage-button,
 .add-product-button,
-.lend-button,
-.loan-page-button {
-    width: 100%; /* Butonları tam genişlik yap */
-    max-width: 300px; /* Butonların maksimum genişliği */
+.lend1-button,
+.loan-page-button,
+.delete-button,
+.update-button {
     background-color: #4CAF50;
     color: white;
-    padding: 10px;
+    padding: 10px 20px;
     text-decoration: none;
     border-radius: 5px;
     text-align: center;
+    display: inline-block;
     transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
 }
 
+.button:hover,
 .homepage-button:hover,
 .add-product-button:hover,
 .lend-button:hover,
-.loan-page-button:hover {
+.loan-page-button:hover,
+.delete-button:hover,
+.update-button:hover {
     background-color: #45a049;
 }
 
-/* Sayfa başlığı */
+/* Ensure delete and update buttons are consistent with others */
+.delete-button, .update-button {
+    padding: 10px 15px;
+    display: inline-block;
+    min-width: unset;
+    font-size: 12px;
+}
+
+/* Page title */
 .page-title {
     text-align: center;
-    font-size: 1.5rem; /* Mobilde daha uygun bir başlık boyutu */
     margin-bottom: 20px;
 }
 
-/* Excel ve PDF dışa aktarma butonları */
+/* Export buttons */
+.acties-button-container {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+
+}
 .export-buttons-container {
     display: flex;
-    justify-content: center; /* Butonları ortala */
-    flex-wrap: wrap; /* Mobilde butonları sarmalayacak şekilde yap */
-    gap: 10px; /* Butonlar arasında boşluk */
+    gap: 15px;
+    justify-content: space-around;
+    margin-bottom: 20px;
 }
 
 .export-button {
-    width: 100%; /* Butonları tam genişlik yap */
-    max-width: 300px; /* Maksimum genişlik sınırı */
     background-color: #4CAF50;
     color: white;
-    padding: 10px;
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -82,7 +96,7 @@
     background-color: #45a049;
 }
 
-/* Tablo için düzenlemeler */
+/* Stock table styling */
 .stock-table {
     width: 100%;
     border-collapse: collapse;
@@ -93,9 +107,8 @@
 .stock-table th,
 .stock-table td {
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 12px;
     text-align: center;
-    font-size: 0.9rem; /* Mobilde yazı boyutunu biraz küçült */
 }
 
 .stock-table th {
@@ -103,37 +116,49 @@
     font-weight: bold;
 }
 
-/* Mobilde tabloyu yatay kaydırılabilir yap */
-@media (max-width: 600px) {
-    .stock-table {
-        display: block;
-        overflow-x: auto; /* Yatay kaydırma */
-        white-space: nowrap; /* İçeriğin bir satıra sığması */
-    }
+.stock-table tr:hover {
+    background-color: #f9f9f9;
 }
 
-/* Mobilde butonlar için düzenleme */
-.delete-button,
-.update-button {
-    width: 100%; /* Butonları tam genişlik yap */
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
+/* Accordion styles */
+.accordion-header {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-.delete-button:hover,
-.update-button:hover {
-    background-color: #45a049;
+.accordion-header:hover {
+    background-color: #e0e0e0;
 }
 
-/* Mobilde tablo hücrelerinin taşmaması için */
-@media (max-width: 600px) {
-    .acties-table {
-        display: block;
-        white-space: nowrap;
+.accordion-content {
+    width: 100%;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-top: none;
+    margin-top: -1px;
+    transition: max-height 0.3s ease;
+}
+
+.accordion-content th,
+.accordion-content td {
+    padding: 10px;
+    text-align: center;
+}
+
+.accordion-content th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .action-buttons-container {
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .stock-table,
+    .accordion-content {
+        font-size: 14px;
     }
 }

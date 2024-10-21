@@ -28,7 +28,7 @@ const LoanProductPage = () => {
         fetchLoanItems();
     }, [currentLocation]);
 
-    // Ürünü geri verme işlemi
+
     const handleReturnLoan = async (loanId, productId, quantity, productData) => {
         try {
             await deleteDoc(doc(db, "loans", loanId));
@@ -87,13 +87,11 @@ const LoanProductPage = () => {
                 <h1>{currentLocation} Geleende Producten</h1>
             </header>
 
-            <div className="back-button-container">
+
+            <div className="export-buttons-container">
                 <button className="back-button" onClick={() => navigate(-1)}>
                     Vorige pagina
                 </button>
-            </div>
-
-            <div className="export-buttons-container">
                 <button className="export-button" onClick={() => exportToExcel("loan_list", loanItems)}>
                     Exporteer Geleende Lijst (Excel)
                 </button>
