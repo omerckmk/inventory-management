@@ -23,7 +23,9 @@ const Home = () => {
             <ul className="location-list">
                 <li><Link to="/location/Apeldoorn" className="location-link">Apeldoorn</Link></li>
                 <li><Link to="/location/Deventer" className="location-link">Deventer</Link></li>
+                <li><Link to="/location/Cambio" className="location-link">Cambio</Link></li>
                 <li><Link to="/location/Zutphen" className="location-link">Zutphen</Link></li>
+
             </ul>
             <button onClick={handleLogout} className="logout-button">Uitloggen</button> {/* Çıkış Butonu */}
         </div>

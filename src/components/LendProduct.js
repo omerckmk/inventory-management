@@ -25,6 +25,7 @@ const LendProduct = () => {
                 ...doc.data(),
             }));
 
+
             // Ürünleri productCode'a göre gruplama
             const grouped = items.reduce((acc, item) => {
                 if (!acc[item.productCode]) {

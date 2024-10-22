@@ -21,7 +21,11 @@ const StockListPage = () => {
                 id: doc.id,
                 ...doc.data(),
             }));
-            const filteredItems = items.filter(item => item.quantity > 0);
+
+            // Alfabetik sıralama (productName'e göre)
+            const sortedItems = items.sort((a, b) => a.productName.localeCompare(b.productName));
+
+            const filteredItems = sortedItems.filter(item => item.quantity > 0);
             setStockItems(filteredItems);
         };
 
@@ -137,14 +141,14 @@ const StockListPage = () => {
                                                 <td>{product.size}</td>
                                                 <td>{product.quantity}</td>
                                                 <td>
-                                                   <div className="acties-button-container" >
-                                                    <button className="delete-button" onClick={() => handleDelete(product.id)}>
-                                                        Verwijder
-                                                    </button>
-                                                    <Link className="update-button" to={`/location/${location}/update/${product.id}`}>
-                                                        Bijwerken
-                                                    </Link>
-                                                   </div>
+                                                    <div className="acties-button-container" >
+                                                        <button className="delete-button" onClick={() => handleDelete(product.id)}>
+                                                            Verwijder
+                                                        </button>
+                                                        <Link className="update-button" to={`/location/${location}/update/${product.id}`}>
+                                                            Bijwerken
+                                                        </Link>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         ))}
